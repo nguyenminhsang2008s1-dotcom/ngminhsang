@@ -1,0 +1,1288 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trường Chinh & Gia Lai - Siêu Phẩm 2026</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;1,700&family=Dancing+Script:wght@700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --blue: #0056b3;
+        --green: #1a4314;
+        --pink: #ff69b4;
+        --soft-pink: #fff0f5;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Montserrat", sans-serif;
+        overflow: hidden;
+        background: #f0f2f5;
+      }
+
+      /* --- INTRO SCREEN --- */
+      #intro-screen {
+        position: fixed;
+        inset: 0;
+        background: white;
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: transform 1s cubic-bezier(0.85, 0, 0.15, 1);
+      }
+      .rocket {
+        font-size: 80px;
+        animation: launch 1s infinite alternate;
+      }
+      @keyframes launch {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(-30px);
+        }
+      }
+
+      /* --- HEADER --- */
+      .main-header {
+        background: white;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        will-change: transform, opacity;
+      }
+
+      .page {
+        transform-style: preserve-3d;
+        will-change: transform, opacity;
+      }
+
+      .movie-card,
+      .dest-card,
+      .story-circle,
+      .slider-btn {
+        will-change: transform;
+      }
+      .logo-wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        border-bottom: 1px solid #eee;
+      }
+      .school-logo {
+        width: 60px;
+        height: 60px;
+        background: var(--blue);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        margin-right: 15px;
+        border: 3px solid var(--pink);
+      }
+      .nav-links {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        padding: 15px;
+        font-weight: 700;
+        font-size: 14px;
+      }
+      .nav-links a {
+        text-decoration: none;
+        color: #333;
+        transition: 0.3s;
+        position: relative;
+        cursor: pointer;
+      }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--pink);
+        transition: 0.3s;
+      }
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      /* --- PAGE SYSTEM --- */
+      .page-container {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        perspective: 1500px;
+      }
+      .page {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        backface-visibility: hidden;
+        transition:
+          transform 1s cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 0.5s;
+        background: white;
+      }
+      .page-left {
+        transform: rotateY(-90deg);
+        opacity: 0;
+        pointer-events: none;
+      }
+      .page-right {
+        transform: rotateY(90deg);
+        opacity: 0;
+        pointer-events: none;
+      }
+      .page.active {
+        transform: rotateY(0deg);
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      /* --- STORIES --- */
+      .story-tray {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        padding: 25px 5%;
+        background: white;
+      }
+      .story-item {
+        text-align: center;
+        min-width: 90px;
+        cursor: pointer;
+      }
+      .story-circle {
+        width: 85px;
+        height: 85px;
+        border-radius: 50%;
+        border: 3px solid var(--pink);
+        padding: 4px;
+        transition: 0.4s;
+        margin: 0 auto 8px;
+        overflow: hidden;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .story-circle img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      .story-item:hover .story-circle {
+        transform: scale(1.1) rotate(5deg);
+        border-color: var(--blue);
+      }
+
+      /* --- HERO SLIDER --- */
+      .netflix-hero {
+        height: 65vh;
+        background: #000;
+        position: relative;
+        overflow: hidden;
+      }
+      #school-hero-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.7;
+        transition: 0.8s ease-in-out;
+      }
+      .hero-info {
+        position: absolute;
+        bottom: 10%;
+        left: 5%;
+        color: white;
+        z-index: 10;
+      }
+      .slider-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: none;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 20;
+        transition: 0.3s;
+        backdrop-filter: blur(5px);
+      }
+      .slider-btn:hover {
+        background: var(--pink);
+        transform: translateY(-50%) scale(1.1);
+      }
+      .btn-prev {
+        left: 20px;
+      }
+      .btn-next {
+        right: 20px;
+      }
+
+      /* --- HOVER EFFECT --- */
+      .movie-card,
+      .dest-card {
+        transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        overflow: hidden;
+        cursor: pointer;
+        border: 2px solid transparent;
+      }
+      .movie-card:hover,
+      .dest-card:hover {
+        transform: scale(1.05) translateY(-5px);
+        box-shadow: 0 15px 30px rgba(255, 105, 180, 0.3);
+        border-color: var(--pink) !important;
+      }
+
+      /* --- VIEWER --- */
+      #story-viewer {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.95);
+        z-index: 11000;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(10px);
+      }
+      .viewer-container {
+        position: relative;
+        transition: all 0.5s ease;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 2px solid #333;
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .viewer-portrait {
+        width: auto;
+        height: 90vh;
+        aspect-ratio: 9 / 16;
+      }
+      .viewer-landscape {
+        width: 95%;
+        max-width: 1200px;
+        aspect-ratio: 19 / 6;
+      }
+      #story-content {
+        width: 100%;
+        height: 100%;
+      }
+      #story-content video,
+      #story-content img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .progress-bar-wrap {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        z-index: 20;
+      }
+      #progress-fill {
+        height: 100%;
+        width: 0%;
+        background: var(--pink);
+        transition: width linear;
+      }
+      .close-viewer {
+        position: absolute;
+        top: -50px;
+        right: 0;
+        color: white;
+        font-size: 35px;
+        cursor: pointer;
+        z-index: 100;
+        transition: 0.3s;
+      }
+      .close-viewer:hover {
+        color: var(--pink);
+        transform: rotate(90deg);
+      }
+
+      /* --- GIA LAI SPECIFIC STYLE --- */
+      .gialai-section-title {
+        font-family: "Playfair Display", serif;
+        color: var(--green);
+        margin: 40px 0 20px;
+        border-left: 8px solid var(--pink);
+        padding-left: 15px;
+      }
+      .best-time-card {
+        background: var(--soft-pink);
+        border-radius: 20px;
+        padding: 30px;
+        margin-top: 20px;
+        border: 2px dashed var(--pink);
+      }
+      .food-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
+      .food-item {
+        text-align: center;
+        background: white;
+        padding: 15px;
+        border-radius: 15px;
+        border: 1px solid #ddd;
+        transition: 0.3s;
+      }
+      .food-item:hover {
+        border-color: var(--pink);
+        transform: translateY(-5px);
+      }
+      .food-item img {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 10px;
+      }
+
+      /* --- FOOTER --- */
+      .main-footer {
+        background-color: #1a529b;
+        color: white;
+        padding: 40px 20px;
+        text-align: center;
+        font-size: 14px;
+        line-height: 1.8;
+      }
+      .main-footer a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      /* --- MODALS --- */
+      #modal-contact,
+      #modal-info {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        backdrop-filter: blur(8px);
+      }
+      .modal-box {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        max-width: 450px;
+        width: 90%;
+        position: relative;
+        animation: modalShow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border-top: 10px solid var(--pink);
+      }
+      @keyframes modalShow {
+        from {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 30px;
+        cursor: pointer;
+        color: #ccc;
+      }
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 15px;
+        background: var(--soft-pink);
+        border-radius: 10px;
+        margin-top: 15px;
+      }
+      .btn-wow {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 5000;
+        background: var(--pink);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 50px;
+        font-weight: 900;
+        cursor: pointer;
+        box-shadow: 0 5px 20px rgba(255, 105, 180, 0.4);
+      }
+      /* --- PERFORMANCE BOOST --- */
+      .page,
+      .movie-card,
+      .dest-card,
+      .story-circle,
+      .slider-btn,
+      #school-hero-img {
+        transform: translateZ(0);
+        backface-visibility: hidden;
+      }
+
+      /* Tối ưu layout */
+      .page {
+        contain: layout style paint;
+      }
+
+      /* Smooth animation */
+      .page {
+        transition:
+          transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+          opacity 0.4s;
+      }
+
+      /* Hover mượt hơn */
+      .movie-card:hover,
+      .dest-card:hover {
+        transform: scale(1.04) translateY(-6px);
+      }
+
+      /* Hero fade effect */
+      #school-hero-img {
+        transition:
+          opacity 0.6s ease,
+          transform 0.8s ease;
+      }
+
+      /* Story fade */
+      #story-content img,
+      #story-content video {
+        opacity: 0;
+        animation: fadeIn 0.6s forwards;
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Giảm lag khi scroll */
+      .page::-webkit-scrollbar {
+        width: 6px;
+      }
+      .page::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+      }
+      .hero {
+        transition: transform 0.2s ease-out;
+        transform-style: preserve-3d;
+      }
+      .glow {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .glow::before {
+        content: "";
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          120deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        transform: rotate(25deg);
+        animation: shine 3s infinite;
+      }
+
+      @keyframes shine {
+        0% {
+          transform: translateX(-100%) rotate(25deg);
+        }
+        100% {
+          transform: translateX(100%) rotate(25deg);
+        }
+      }
+      .hidden {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s ease;
+      }
+
+      .show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .cursor {
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: rgba(255, 105, 180, 0.6);
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        transition: transform 0.1s ease;
+        z-index: 9999;
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      #bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="intro-screen">
+      <div class="rocket">🚀</div>
+      <h2 id="intro-text" style="margin-top: 20px; color: var(--blue)">
+        Đang tải đợi tí...
+      </h2>
+    </div>
+
+    <button class="btn-wow" onclick="flipPage()">ĐỔI GÓC NHÌN ➔</button>
+
+    <div class="page-container">
+      <!-- TRANG TRƯỜNG -->
+      <div id="page-school" class="page active">
+        <header class="main-header">
+          <div class="logo-wrap">
+            <div
+              class="school-logo"
+              style="overflow: hidden; background: white"
+            >
+              <img
+                src="./photo/photo/Ảnh màn hình 2026-03-27 lúc 19.54.10.png"
+                style="width: 100%; height: 100%; object-fit: cover"
+              />
+            </div>
+            <h1 style="color: var(--blue); font-size: 24px">
+              THPT TRƯỜNG CHINH
+            </h1>
+          </div>
+          <nav class="nav-links">
+            <a href="#">🏠 Trang chủ</a><a href="#">📚 Học tập</a
+            ><a href="#">🎨 CLB</a><a onclick="openContact()">📞 Liên hệ</a>
+          </nav>
+        </header>
+
+        <div class="story-tray">
+          <div
+            class="story-item"
+            onclick="viewStory('./photo/photo/tuthiem.jpg', true, 'portrait')"
+          >
+            <div class="story-circle">
+              <img src="./photo/photo/tuthien2.jpg" />
+            </div>
+            <small>thiện nguyện</small>
+          </div>
+
+          <div
+            class="story-item"
+            onclick="
+              viewStory('./photo/photo/quocphong1.jpg', true, 'portrait')
+            "
+          >
+            <div class="story-circle">
+              <img src="./photo/photo/quocphong1.jpg" />
+            </div>
+            <small>Hội thao</small>
+          </div>
+        </div>
+
+        <div class="netflix-hero">
+          <button class="slider-btn btn-prev" onclick="changeHero(-1)">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <img id="school-hero-img" src="./photo/photo/tuthiem.jpg" />
+          <button class="slider-btn btn-next" onclick="changeHero(1)">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+
+          <div class="hero-info">
+            <h2 style="font-size: 50px; font-weight: 900">KHOẢN KHẮC</h2>
+            <p>Chào mừng bạn đến với Trường THPT Trường Chinh</p>
+            <button
+              onclick="
+                viewStory('./photo/video/7682028045459.mp4', false, 'landscape')
+              "
+              style="
+                padding: 15px 40px;
+                background: var(--pink);
+                color: white;
+                border: none;
+                border-radius: 5px;
+                margin-top: 20px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: 0.3s;
+              "
+            >
+              ▶ XEM VIDEO
+            </button>
+          </div>
+        </div>
+
+        <div style="padding: 40px 5%">
+          <h3
+            style="
+              border-left: 5px solid var(--pink);
+              padding-left: 15px;
+              margin-bottom: 20px;
+            "
+          >
+            Khoảnh Khắc Mới Nhất
+          </h3>
+          <div
+            style="
+              display: flex;
+              gap: 25px;
+              overflow-x: auto;
+              padding-bottom: 20px;
+            "
+          >
+            <div
+              class="movie-card"
+              onclick="openInfo('Câu lạc bộ STEM', 'Sáng tạo khoa học.')"
+              style="
+                min-width: 300px;
+                height: 200px;
+                border-radius: 15px;
+                background: url(./photo/photo/AB21D29E-60F6-4626-86DC-8B5DB2EF87E0_1_105_c.jpeg)
+                  center/cover;
+              "
+            ></div>
+            <div
+              class="movie-card"
+              onclick="openInfo('Văn nghệ trường', 'Đam mê tỏa sáng.')"
+              style="
+                min-width: 300px;
+                height: 200px;
+                border-radius: 15px;
+                background: url(./photo/photo/thanhlich.jpg) center/cover;
+              "
+            ></div>
+          </div>
+        </div>
+
+        <!-- FOOTER TRANG TRƯỜNG -->
+        <footer class="main-footer">
+          <div style="max-width: 1200px; margin: 0 auto">
+            <p style="font-weight: bold; font-size: 16px; margin-bottom: 10px">
+              Trường THPT Trường Chinh - Gia Lai
+            </p>
+            <p>
+              Email:
+              <a href="mailto:truongchinh@gialai.edu.vn"
+                >truongchinh@gialai.edu.vn</a
+              >
+            </p>
+            <p>Kết nối: <a href="#">Facebook</a> | <a href="#">Zalo</a></p>
+            <hr
+              style="
+                border: 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
+                margin: 20px auto;
+                width: 50%;
+              "
+            />
+            <p style="opacity: 0.8">© 2026 Bản quyền thuộc về nhà trường</p>
+          </div>
+        </footer>
+      </div>
+
+      <!-- TRANG GIA LAI -->
+      <div id="page-gialai" class="page page-right">
+        <header class="main-header">
+          <div class="logo-wrap">
+            <div
+              class="school-logo"
+              style="background: white; overflow: hidden"
+            >
+              <img
+                src="./photo/photogialai/logo.png"
+                style="width: 100%; height: 100%; object-fit: cover"
+              />
+            </div>
+            <h1
+              style="
+                color: var(--green);
+                font-size: 24px;
+                font-family: &quot;Playfair Display&quot;;
+              "
+            >
+              GIA LAI
+            </h1>
+          </div>
+          <nav class="nav-links">
+            <a href="#">⛰️ Điểm đến</a><a href="#">🍛 Đặc sản</a
+            ><a href="#">📅 Thời điểm</a
+            ><a onclick="openContact()">📞 Liên hệ</a>
+          </nav>
+        </header>
+
+        <div style="padding: 40px 10%; background: white">
+          <h2 class="gialai-section-title">Các Địa Điểm Du Lịch</h2>
+          <div
+            class="destination-grid"
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+              gap: 25px;
+            "
+          >
+            <div
+              class="dest-card"
+              onclick="openInfo('Biển Hồ T\'Nưng', 'Đôi mắt Pleiku long lanh.')"
+            >
+              <img
+                src="./photo/photogialai/biển hồ.webp"
+                style="
+                  width: 100%;
+                  height: 250px;
+                  object-fit: cover;
+                  border-radius: 15px;
+                "
+              />
+              <div style="padding: 15px">
+                <h4>Biển Hồ T'Nưng</h4>
+                <p style="font-size: 12px; color: #666">
+                  Biểu tượng vĩnh cửu của Phố Núi.
+                </p>
+              </div>
+            </div>
+            <div
+              class="dest-card"
+              onclick="
+                openInfo('Núi lửa Chư Đăng Ya', 'Thiên đường dã quỳ tháng 11.')
+              "
+            >
+              <img
+                src="./photo/photogialai/núi lửa chư đăng ya.jpeg"
+                style="
+                  width: 100%;
+                  height: 250px;
+                  object-fit: cover;
+                  border-radius: 15px;
+                "
+              />
+              <div style="padding: 15px">
+                <h4>Núi lửa Chư Đăng Ya</h4>
+                <p style="font-size: 12px; color: #666">
+                  Thiên đường dã quỳ tháng 11.
+                </p>
+              </div>
+            </div>
+            <div
+              class="dest-card"
+              onclick="
+                openInfo('Thủy điện Yaly', 'Kỳ quan kỹ thuật giữa đại ngàn.')
+              "
+            >
+              <img
+                src="./photo/photogialai/thuỷ điện ialy.jpg"
+                style="
+                  width: 100%;
+                  height: 250px;
+                  object-fit: cover;
+                  border-radius: 15px;
+                "
+              />
+              <div style="padding: 15px">
+                <h4>Thủy điện Yaly</h4>
+                <p style="font-size: 12px; color: #666">
+                  Kỳ quan kỹ thuật giữa đại ngàn.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <h2 class="gialai-section-title">Mốc Thời Gian Đẹp Nhất</h2>
+          <div class="best-time-card">
+            <ul style="list-style: none; line-height: 2">
+              <li>
+                🍂
+                <strong style="color: var(--pink)">Tháng 11 - 12:</strong> Mùa
+                hoa Dã Quỳ nhuộm vàng núi rừng.
+              </li>
+              <li>
+                ☕ <strong style="color: var(--blue)">Tháng 2 - 3:</strong> Mùa
+                hoa Cà Phê trắng muốt.
+              </li>
+              <li>
+                ☀️ <strong style="color: var(--green)">Tháng 4 - 5:</strong> Khí
+                hậu mát mẻ, nắng vàng rực rỡ.
+              </li>
+            </ul>
+          </div>
+
+          <h2 class="gialai-section-title">Ẩm Thực Phố Núi</h2>
+          <div class="food-grid">
+            <div
+              class="food-item"
+              onclick="openInfo('Phở Khô Gia Lai', 'Phở Hai Tô đặc sản.')"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=300"
+              />
+              <p>Phở Hai Tô</p>
+            </div>
+            <div
+              class="food-item"
+              onclick="openInfo('Gà Nướng Cơm Lam', 'Hương vị núi rừng.')"
+            >
+              <img src="./photo/photogialai/gà nướng cơm lam.jpeg" />
+              <p>Gà Nướng Cơm Lam</p>
+            </div>
+            <div
+              class="food-item"
+              onclick="openInfo('Bò Một Nắng', 'Đặc sản Krông Pa.')"
+            >
+              <img src="./photo/photogialai/bò 1 nắng.jpeg" />
+              <p>Bò Một Nắng</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOOTER TRANG GIA LAI -->
+        <footer class="main-footer">
+          <div style="max-width: 1200px; margin: 0 auto">
+            <p style="font-weight: bold; font-size: 16px; margin-bottom: 10px">
+              Khám Phá Gia Lai - Pleiku
+            </p>
+            <p>
+              Email:
+              <a href="mailto:truongchinh@gialai.edu.vn"
+                >truongchinh@gialai.edu.vn</a
+              >
+            </p>
+            <p>Kết nối: <a href="#">Facebook</a> | <a href="#">Zalo</a></p>
+            <hr
+              style="
+                border: 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
+                margin: 20px auto;
+                width: 50%;
+              "
+            />
+            <p style="opacity: 0.8">© 2026 Du lịch Gia Lai</p>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <!-- CÁC THÀNH PHẦN NỔI -->
+    <div id="story-viewer">
+      <div class="viewer-container" id="viewer-box">
+        <span class="close-viewer" onclick="closeStory()">&times;</span>
+        <div class="progress-bar-wrap"><div id="progress-fill"></div></div>
+        <div id="story-content"></div>
+      </div>
+    </div>
+
+    <div id="modal-contact">
+      <div class="modal-box">
+        <span class="close-btn" onclick="closeContact()">&times;</span>
+        <h2 style="color: var(--blue); text-align: center; margin-bottom: 20px">
+          Liên Hệ
+        </h2>
+        <div class="contact-item">
+          📍
+          <div>Chu Sê, Gia Lai</div>
+        </div>
+        <div class="contact-item">
+          📧
+          <div>truongchinh@gialai.edu.vn</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-info">
+      <div class="modal-box">
+        <span class="close-btn" onclick="closeInfo()">&times;</span>
+        <h2
+          id="info-title"
+          style="color: var(--pink); text-align: center; margin-bottom: 15px"
+        >
+          Tiêu đề
+        </h2>
+        <div
+          id="info-body"
+          style="
+            line-height: 1.6;
+            color: #444;
+            padding: 10px;
+            background: var(--soft-pink);
+            border-radius: 10px;
+          "
+        >
+          Nội dung.
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.onload = () => {
+        preloadImages(heroImgs);
+        setTimeout(() => {
+          document.getElementById("intro-screen").style.transform =
+            "translateY(-100%)";
+        }, 2000);
+
+        startAutoSlide();
+      };
+
+      /* --- PRELOAD ẢNH --- */
+      function preloadImages(arr) {
+        arr.forEach((src) => {
+          const img = new Image();
+          img.src = src;
+        });
+      }
+
+      /* --- HERO SLIDER MƯỢT --- */
+      const heroImgs = [
+        "./photo/photo/tuthiem.jpg",
+        "./photo/photo/hoatdongtrainghiem.jpg",
+        "./photo/photo/hinhtruongchinhchuse.jpg",
+      ];
+
+      let heroIdx = 0;
+      let slideRunning = true;
+
+      function updateHero() {
+        const img = document.getElementById("school-hero-img");
+
+        img.style.opacity = 0;
+
+        setTimeout(() => {
+          img.src = heroImgs[heroIdx];
+          img.style.opacity = 0.7;
+        }, 300);
+      }
+
+      function changeHero(n) {
+        heroIdx = (heroIdx + n + heroImgs.length) % heroImgs.length;
+        updateHero();
+      }
+
+      /* Auto slide bằng requestAnimationFrame */
+      let lastTime = 0;
+      function autoSlide(time) {
+        if (!slideRunning) return;
+
+        if (time - lastTime > 5000) {
+          changeHero(1);
+          lastTime = time;
+        }
+
+        requestAnimationFrame(autoSlide);
+      }
+
+      function startAutoSlide() {
+        requestAnimationFrame(autoSlide);
+      }
+
+      /* --- DỪNG SLIDE KHI TAB ẨN --- */
+      document.addEventListener("visibilitychange", () => {
+        slideRunning = !document.hidden;
+        if (slideRunning) requestAnimationFrame(autoSlide);
+      });
+
+      /* --- STORY VIEWER MƯỢT --- */
+      let storyTimer;
+
+      function viewStory(src, isImage, mode) {
+        const viewer = document.getElementById("story-viewer");
+        const box = document.getElementById("viewer-box");
+        const content = document.getElementById("story-content");
+        const progress = document.getElementById("progress-fill");
+
+        box.className =
+          "viewer-container " +
+          (mode === "landscape" ? "viewer-landscape" : "viewer-portrait");
+
+        viewer.style.display = "flex";
+
+        progress.style.transition = "none";
+        progress.style.width = "0%";
+
+        content.innerHTML = isImage
+          ? `<img src="${src}">`
+          : `<video src="${src}" autoplay muted playsinline></video>`;
+
+        requestAnimationFrame(() => {
+          progress.style.transition = "width 10s linear";
+          progress.style.width = "100%";
+        });
+
+        clearTimeout(storyTimer);
+        storyTimer = setTimeout(closeStory, 10000);
+      }
+
+      function closeStory() {
+        const viewer = document.getElementById("story-viewer");
+        const content = document.getElementById("story-content");
+
+        viewer.style.display = "none";
+        content.innerHTML = "";
+
+        clearTimeout(storyTimer);
+      }
+
+      /* --- FLIP PAGE MƯỢT --- */
+      let isSchool = true;
+
+      function flipPage() {
+        const school = document.getElementById("page-school");
+        const gialai = document.getElementById("page-gialai");
+        const btn = document.querySelector(".btn-wow");
+
+        school.style.willChange = "transform";
+        gialai.style.willChange = "transform";
+
+        if (isSchool) {
+          school.classList.add("page-left");
+          school.classList.remove("active");
+
+          gialai.classList.remove("page-right");
+          gialai.classList.add("active");
+
+          btn.innerText = "VỀ TRƯỜNG ➔";
+        } else {
+          gialai.classList.add("page-right");
+          gialai.classList.remove("active");
+
+          school.classList.remove("page-left");
+          school.classList.add("active");
+
+          btn.innerText = "GIA LAI ➔";
+        }
+
+        isSchool = !isSchool;
+      }
+
+      /* --- MODAL --- */
+      function openContact() {
+        document.getElementById("modal-contact").style.display = "flex";
+      }
+      function closeContact() {
+        document.getElementById("modal-contact").style.display = "none";
+      }
+
+      function openInfo(title, text) {
+        document.getElementById("info-title").innerText = title;
+        document.getElementById("info-body").innerText = text;
+        document.getElementById("modal-info").style.display = "flex";
+      }
+
+      function closeInfo() {
+        document.getElementById("modal-info").style.display = "none";
+      }
+
+      /* Click outside */
+      window.onclick = function (e) {
+        if (e.target.id === "modal-contact") closeContact();
+        if (e.target.id === "modal-info") closeInfo();
+        if (e.target.id === "story-viewer") closeStory();
+      };
+      document.addEventListener("mousemove", (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 30;
+        const y = (e.clientY / window.innerHeight - 0.5) * 30;
+
+        const hero = document.querySelector(".hero");
+        if (hero) {
+          hero.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+        }
+      });
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
+        });
+      });
+
+      document
+        .querySelectorAll(".hidden")
+        .forEach((el) => observer.observe(el));
+      document.querySelectorAll(".btn-wow").forEach((btn) => {
+        btn.addEventListener("mousemove", (e) => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+
+          btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+        });
+
+        btn.addEventListener("mouseleave", () => {
+          btn.style.transform = "translate(0,0)";
+        });
+      });
+      const cursor = document.createElement("div");
+      cursor.classList.add("cursor");
+      document.body.appendChild(cursor);
+
+      document.addEventListener("mousemove", (e) => {
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+      });
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        innerWidth / innerHeight,
+        0.1,
+        1000,
+      );
+
+      const renderer = new THREE.WebGLRenderer({
+        canvas: document.getElementById("bg"),
+        alpha: true,
+      });
+      renderer.setSize(innerWidth, innerHeight);
+
+      camera.position.z = 5;
+
+      // particles
+      const geometry = new THREE.BufferGeometry();
+      const vertices = [];
+
+      for (let i = 0; i < 2000; i++) {
+        vertices.push(
+          (Math.random() - 0.5) * 10,
+          (Math.random() - 0.5) * 10,
+          (Math.random() - 0.5) * 10,
+        );
+      }
+
+      geometry.setAttribute(
+        "position",
+        new THREE.Float32BufferAttribute(vertices, 3),
+      );
+
+      const material = new THREE.PointsMaterial({
+        size: 0.02,
+      });
+
+      const points = new THREE.Points(geometry, material);
+      scene.add(points);
+
+      // animation
+      function animate() {
+        requestAnimationFrame(animate);
+        points.rotation.y += 0.0008;
+        points.rotation.x += 0.0005;
+
+        renderer.render(scene, camera);
+      }
+      animate();
+      document.addEventListener("mousemove", (e) => {
+        const x = e.clientX / window.innerWidth - 0.5;
+        const y = e.clientY / window.innerHeight - 0.5;
+
+        camera.position.x = x * 1;
+        camera.position.y = -y * 1;
+      });
+      window.addEventListener("scroll", () => {
+        const t = window.scrollY;
+
+        document.querySelector(".hero").style.transform =
+          `translateY(${t * 0.3}px)`;
+
+        document.querySelector("#bg").style.opacity = 1 - t / 800;
+      });
+      document.addEventListener("mousemove", (e) => {
+        const mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        const mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+
+        points.rotation.y += mouseX * 0.002;
+        points.rotation.x += mouseY * 0.002;
+      });
+      document.querySelectorAll(".movie-card").forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width;
+          const y = (e.clientY - rect.top) / rect.height;
+
+          card.style.transform = `
+      rotateY(${(x - 0.5) * 20}deg)
+      rotateX(${(0.5 - y) * 20}deg)
+      scale(1.05)
+    `;
+        });
+
+        card.addEventListener("mouseleave", () => {
+          card.style.transform = "rotateY(0) rotateX(0) scale(1)";
+        });
+      });
+      window.addEventListener("resize", () => {
+        camera.aspect = innerWidth / innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(innerWidth, innerHeight);
+      });
+      let character;
+
+      const loader = new THREE.GLTFLoader();
+      loader.load("character.glb", (gltf) => {
+        character = gltf.scene;
+        character.scale.set(1, 1, 1);
+        character.position.set(0, -1, 0);
+        scene.add(character);
+      });
+    </script>
+    <canvas id="bg"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  </body>
+</html>
